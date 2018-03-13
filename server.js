@@ -2,15 +2,19 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { DATABASE_URL, PORT } = require('./config');
+const { DATABASE_URL, PORT, CLIENT_ORIGIN } = require('./config');
 const mongoose = require('mongoose');
 
 const app = express();
 
+const jokeRoutes = require('./routes/jokeRoute');
+
 app.use(morgan('common'));
 app.use(bodyParser.json());
+app.use(cors({origin: CLIENT_ORIGIN}));
 
 app.all('/');
+app.use('/joke', jokeRoutes);
 
 let server;
 
