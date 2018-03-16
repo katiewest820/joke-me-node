@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 const jokeRoutes = require('./routes/jokeRoute');
+const authRoutes = require('./routes/authRoute');
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
@@ -15,6 +16,8 @@ app.use(cors({origin: CLIENT_ORIGIN}));
 
 app.all('/');
 app.use('/joke', jokeRoutes);
+app.use('/auth', authRoutes);
+
 
 let server;
 

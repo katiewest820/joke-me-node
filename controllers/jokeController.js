@@ -1,6 +1,7 @@
 const joke = require('../models/jokeModel');
 
 exports.newJoke = (req, res) => {
+  console.log(req.body)
   let newJoke = new joke();
   newJoke.joke = req.body.joke;
   newJoke.punchLine = req.body.punchLine;
@@ -21,8 +22,12 @@ exports.newJoke = (req, res) => {
 };
 
 exports.getAllJokes = (req, res) => {
-  joke.find({})
+  console.log(req.headers)
+  console.log(req.params.userId)
+  joke.find({userId: req.params.userId})
     .then((jokes) => {
+    console.log('yes')
+    console.log(jokes)
     res.status(200).json({
       message: 'Here are all of your jokes',
       data: jokes
